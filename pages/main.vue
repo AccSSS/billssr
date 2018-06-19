@@ -40,8 +40,8 @@
                     label="操作"
                     width="120px">
                     <template slot-scope="scope">
-                        <el-button type="primary" size="mini" icon="el-icon-edit" @click="jumpToBill(scope.row)"></el-button>
-                        <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteBill(scope.row)"></el-button>
+                        <el-button type="primary" size="mini" icon="el-icon-edit" :disabled="username !== scope.row.username" @click="jumpToBill(scope.row)"></el-button>
+                        <el-button type="danger" size="mini" icon="el-icon-delete" :disabled="username !== scope.row.username" @click="deleteBill(scope.row)"></el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -69,8 +69,8 @@
                                 </el-form-item>
                                 <el-form-item label="操作:">
                                     <span>
-                                        <el-button type="primary" icon="el-icon-edit" @click="jumpToBill(props.row)"></el-button>
-                                        <el-button type="danger" icon="el-icon-delete" @click="deleteBill(props.row)"></el-button>
+                                        <el-button type="primary" icon="el-icon-edit" :disabled="username !== props.row.username" @click="jumpToBill(props.row)"></el-button>
+                                        <el-button type="danger" icon="el-icon-delete" :disabled="username !== props.row.username" @click="deleteBill(props.row)"></el-button>
                                     </span>
                                 </el-form-item>
                             </el-form>
@@ -106,7 +106,7 @@
 </template>
 <script>
 import { getMainData } from '../api/main'
-import { baseURL } from '../config/index.js'
+import { getName } from '../utils/auth.js'
 export default {
     head () {
       return {
@@ -123,6 +123,7 @@ export default {
         loading: false,
         dialogVisible: false,
         billItem: {},
+        username: getName()
       }
     },
     async asyncData () {
@@ -162,7 +163,6 @@ export default {
     },
     mounted() {
         this.getMainData();
-        // console.log(baseURL)
     }
 }
 </script>
@@ -189,6 +189,10 @@ export default {
     }
     .pc-table {
         display: none !important;
+    }
+
+    .main-container {
+        margin: 20px -15px!important;
     }
 }
 

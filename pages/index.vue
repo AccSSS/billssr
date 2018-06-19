@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <el-card shadow="hover">
+    <el-card shadow="hover" class="card">
       <div slot="header" class="clearfix">
         <span>登录</span>
       </div>
@@ -90,7 +90,7 @@ export default {
 .links {
   padding-top: 15px;
 }
-.loginForm {
+.card {
   width:300px;
 }
 </style>
